@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java
+  labels:
+    app: java
+    kubernetes.azure.com/generator: devhub
+  namespace: mvnarch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java
+  template:
+    metadata:
+      labels:
+        app: java
+    spec:
+      containers:
+        - name: java
+          image: acr04nov.azurecr.io/mvnarch:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
